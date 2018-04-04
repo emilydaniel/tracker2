@@ -21,8 +21,30 @@ class Tracker2 extends React.Component {
             users: [],
         };
 
-        //this.request_tasks();
-        //this.request_users();
+        this.request_tasks();
+        this.request_users();
+    }
+
+    reqest_posts() {
+        $.ajax("/api/v1/tasks", {
+            method: "get",
+            dataType: "json",
+            contentType: "application/json; charset=UTF-8",
+            success: (resp) => {
+                this.setState(_.extend(this.state, { tasks: resp.data }));
+            },
+        });
+    }
+
+    request_users() {
+        $.ajax("api/v1/users", {
+            method: "get",
+            dataType: "json",
+            contentType: "application/json; charset=UTF-8",
+            success: (resp) => {
+                this.setState(_.extend(this.state, { users: resp.data }));
+            },
+        });
     }
 
     render() {
