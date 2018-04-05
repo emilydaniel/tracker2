@@ -29,7 +29,7 @@ let Tracker2 = connect((state) => state)((props) => {
                     </div>
                 } />
                 <Route path="/users" exact={true} render={() =>
-                    <Users users={props.state.users} />
+                    <Users users={props.users} />
                 } />
             </div>
         </Router>

@@ -34,11 +34,26 @@ class TheServer {
             method: "post",
             dataType: "json",
             contentType: "application/json; charset=UTF-8",
-            data: JSON.stringify({ task: data }),
+            data: JSON.stringify({ task: data , token: data.token}),
             succes: (resp) => {
                 store.dispatch({
                     type: 'ADD_TASK',
                     task: resp.data,
+                });
+            },
+        });
+    }
+
+    submit_login(data) {
+        $.ajax("/api/v1/token", {
+            methon: "post",
+            dataType: "json",
+            contentType: "application/json; charset=UTF-8",
+            data: JSON.stringify(data),
+            success: (resp) => {
+                store.dispatch({
+                    type: 'SET_TOKEN',
+                    token: resp,
                 });
             },
         });
