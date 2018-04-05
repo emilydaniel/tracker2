@@ -8,8 +8,7 @@ export default function Tasklist(params) {
               descr={ task.descr }
               complete={ task.complete }
               time_spent= { task.time_spent } />
-        }
-    );
+        });
     return (
         <div>
             { tasks }

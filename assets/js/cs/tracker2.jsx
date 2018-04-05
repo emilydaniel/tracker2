@@ -1,59 +1,39 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRoute as Router, Route } from 'react-router-dom';
+import { Provider, connect } from 'react-redux';
 
 import Nav from './nav';
 import Tasklist from './tasklist';
 import Users from './users';
-import Taskfrom from './task-form';
+import Taskform from './task-form';
 
-export default function tracker2_init() {
+export default function tracker2_init(store) {
     let root = document.getElementById('root');
-    ReactDom.render(<Tracker2 />, root);
+    ReactDOM.render(
+        <Provider store={ store }>
+            <Tracker2 />
+        </Provider>,
+        root,
+    );
 }
 
-class Tracker2 extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            tasks: [],
-            users: [],
-        };
-
-        this.request_tasks();
-        this.request_users();
-    }
-
-    reqest_posts() {
-        $.ajax("/api/v1/tasks", {
-            method: "get",
-            dataType: "json",
-            contentType: "application/json; charset=UTF-8",
-            success: (resp) => {
-                this.setState(_.extend(this.state, { tasks: resp.data }));
-            },
-        });
-    }
-
-    request_users() {
-        $.ajax("api/v1/users", {
-            method: "get",
-            dataType: "json",
-            contentType: "application/json; charset=UTF-8",
-            success: (resp) => {
-                this.setState(_.extend(this.state, { users: resp.data }));
-            },
-        });
-    }
-
-    render() {
-        return (
-            <Router>
-                <div>
-                    <p>Hello</p>
-                </div>
-            </Router>
-        );
-    }
-}
+let Tracker2 = connect((state) => state)((props) => {
+    console.log("PROPS", props);
+    return (
+        <Router>
+            <div>
+                <Nav />
+                <Route path="/" exact={true} render={() => 
+                    <div>
+                        <PostForm users={props.state.users} />
+                        <Tasklist posts={props.state.tasks} />
+                    </div>
+                } />
+                <Route path="/users" exact={true} render={() =>
+                    <Users users={props.state.users} />
+                } />
+            </div>
+        </Router>
+    );
+});

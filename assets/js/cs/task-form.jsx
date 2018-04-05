@@ -1,40 +1,72 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Button, FormGroup, Label, Input } from 'reactstrap';
+import api from '../api';
 
-export default function TaskForm(params) {
-    let users = _.map(params.users, (users) => {
-        <option key={ user.name } value={ user.name }>
-            { user.name }
-        </option>
+function TaskForm(props) {
+    function update(ev) {
+        let lgt = $(ev.target);
+
+        let data = {};
+        data[tgt.attr('name')] = tgt.val();
+        let action = {
+            type: 'UPDATE_FORM',
+            data: data,
+        };
+        console.log("ACTION", action);
+        params.dispatch(action);
+    }
+
+    function submit(ev) {
+        api.submit_task(props.form);
+        console.log(props.form);
+    }
+
+
+    let users = _.map(props.users, (user) => {
+            <option key={user.name} value={user.name}>
+                {user.name}
+            </option>
         }
     );
 
-    return (
-        <div style={{ padding: "4ex" }}>
+    return
+        <div style={ {padding: "4ex"} }>
             <h2>New Task</h2>
             <FormGroup>
-                <Label for="user_name">User</Label>
-                <Input type="select" name="user_name">
+                <Label for="title">Title</Label>
+                <Input type="textarea" name="title"
+                       value={props.tasks.title} onChange={update} />
+            </FormGroup>
+            <FormGroup>
+                <Label for="assigned_user">User</Label>
+                <Input type="select" name="assigned_user" 
+                       value={props.tasks.user} onChange={update}>
                     { users }
                 </Input>
             </FormGroup>
             <FormGroup>
-                <Label for="title">User</Label>
-                <Input type="textarea" name="title" />
+                <Label for="complete">Complete?</Label>
+                <Input type="checkbox" name="complete" 
+                       checked={props.tasks.complete} onChange={update} />
             </FormGroup>
             <FormGroup>
-                <Label for="descr">User</Label>
-                <Input type="textarea" name="descr" />
+                <Label for="descr">Description</Label>
+                <Input type="textarea" name="descr"
+                       value={props.tasks.descr} onChange={update} />
             </FormGroup>
             <FormGroup>
-                <Label for="time_spent">User</Label>
-                <Input type="textarea" name="time_spent" />
+                <Label for="time_spent">Time Spent</Label>
+                <Input type="number" name="time_spent"
+                       vale={props.task.time_spent} onChange={update} />
             </FormGroup>
-            <FormGroup>
-                <Label for="complete">User</Label>
-                <Input type="textarea" name="complete" />
-            </FormGroup>
-            <Button onClick={() => alert("TODO: Manage State")}>Submit</Button>
-        </div>
-    );
+            <Button onClick={submit} color="primary">Create</Button>
+        </div>;
 }
+
+function state2props(state) {
+    console.log("rerender", state);
+    return { tasks: state.tasks };
+}
+
+export default connect(state2props)(TaskForm);
