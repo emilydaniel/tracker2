@@ -6,7 +6,7 @@ defmodule Tracker2Web.TokenController do
 
   action_fallback Tracker2Web.FallbackController
 
-  def create(conn, %{"name" => name, "pass" => "pass"}) do
+  def create(conn, %{"name" => name, "pass" => pass}) do
     with {:ok, %User{} = user} <- Tracker2.Users.get_and_auth_user(name, pass) do
       token = Phoenix.Token.sign(conn, "auth token", user)
       conn
