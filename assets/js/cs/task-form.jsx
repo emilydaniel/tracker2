@@ -4,8 +4,9 @@ import { Button, FormGroup, Label, Input } from 'reactstrap';
 import api from '../api';
 
 function TaskForm(props) {
+    console.log("TASKFORM", props);
     function update(ev) {
-        let lgt = $(ev.target);
+        let tgt = $(ev.target);
 
         let data = {};
         data[tgt.attr('name')] = tgt.val();
@@ -14,7 +15,7 @@ function TaskForm(props) {
             data: data,
         };
         console.log("ACTION", action);
-        params.dispatch(action);
+        props.dispatch(action);
     }
 
     function submit(ev) {
@@ -22,13 +23,8 @@ function TaskForm(props) {
         console.log(props.form);
     }
 
-
-    let users = _.map(props.users, (user) => {
-            <option key={user.name} value={user.name}>
-                {user.name}
-            </option>
-        }
-    );
+    let users = _.map(props.users, (user) => <option key={user.name} value={user.name}>{user.name}</option>);
+    console.log("FORMUSER", props.users);
 
     return (
         <div style={ {padding: "4ex"} }>
@@ -40,8 +36,8 @@ function TaskForm(props) {
             </FormGroup>
             <FormGroup>
                 <Label for="assigned_user">User</Label>
-                <Input type="select" name="assigned_user" 
-                       value={props.task.user} onChange={update}>
+                <Input type="select" name="assigned_user">
+                       value={props.task.assigned_user} onChange={update}>
                     { users }
                 </Input>
             </FormGroup>

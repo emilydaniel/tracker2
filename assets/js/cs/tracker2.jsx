@@ -9,13 +9,14 @@ import Users from './users';
 import TaskForm from './task-form';
 
 let Tracker2 = connect((state) => state)((props) => {
+    
     return (
         <Router>
             <div>
                 <Nav />
                 <Route path="/" exact={true} render={() => 
                     <div>
-                        <TaskForm />
+                        <TaskForm task={props.task} users={props.users}/>
                         <Tasklist task={props.task} />
                     </div>
                 } />
