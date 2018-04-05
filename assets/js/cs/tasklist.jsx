@@ -2,12 +2,12 @@ import React from 'react';
 import Task from './task';
 
 export default function Tasklist(params) {
-    let tasks = _.map(params.tasks, (task) => {
-        <Task assigned_user={ task.assigned_user }
-              title={ task.title }
-              descr={ task.descr }
-              complete={ task.complete }
-              time_spent= { task.time_spent } />
+    let tasks = _.map(params.task, (atask) => {
+        <Task assigned_user={ atask.assigned_user }
+              title={ atask.title }
+              descr={ atask.descr }
+              complete={ atask.complete }
+              time_spent= { atask.time_spent } />
         });
     return (
         <div>

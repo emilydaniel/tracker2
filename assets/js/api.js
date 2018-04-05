@@ -7,7 +7,10 @@ class TheServer {
             dataType: "json",
             contentType: "application/json; charset=UTF-8",
             success: (resp) => {
-                this.setState(_.extend(this.state, { tasks: resp.data }));
+                store.dispatch({
+                    type: 'TASK_LIST',
+                    task: resp.data,
+                });
             },
         });
     }
@@ -18,7 +21,10 @@ class TheServer {
             dataType: "json",
             contentType: "application/json; charset=UTF-8",
             success: (resp) => {
-                this.setState(_.extend(this.state, { users: resp.data }));
+                store.dispatch({
+                    type: 'USERS_LIST',
+                    users: resp.data,
+                });
             },
         });
     }

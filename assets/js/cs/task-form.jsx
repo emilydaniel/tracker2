@@ -36,24 +36,24 @@ function TaskForm(props) {
             <FormGroup>
                 <Label for="title">Title</Label>
                 <Input type="textarea" name="title"
-                       value={props.tasks.title} onChange={update} />
+                       value={props.task.title} onChange={update} />
             </FormGroup>
             <FormGroup>
                 <Label for="assigned_user">User</Label>
                 <Input type="select" name="assigned_user" 
-                       value={props.tasks.user} onChange={update}>
+                       value={props.task.user} onChange={update}>
                     { users }
                 </Input>
             </FormGroup>
             <FormGroup>
                 <Label for="complete">Complete?</Label>
                 <Input type="checkbox" name="complete" 
-                       checked={props.tasks.complete} onChange={update} />
+                       checked={props.task.complete} onChange={update} />
             </FormGroup>
             <FormGroup>
                 <Label for="descr">Description</Label>
                 <Input type="textarea" name="descr"
-                       value={props.tasks.descr} onChange={update} />
+                       value={props.task.descr} onChange={update} />
             </FormGroup>
             <FormGroup>
                 <Label for="time_spent">Time Spent</Label>
@@ -66,7 +66,7 @@ function TaskForm(props) {
 
 function state2props(state) {
     console.log("rerender", state);
-    return { tasks: state.tasks };
+    return { task: state.task };
 }
 
 export default connect(state2props)(TaskForm);

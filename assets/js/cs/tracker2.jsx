@@ -9,25 +9,23 @@ import Users from './users';
 import Taskform from './task-form';
 
 export default function tracker2_init(store) {
-    let root = document.getElementById('root');
     ReactDOM.render(
         <Provider store={ store }>
             <Tracker2 />
         </Provider>,
-        root,
+        document.getElementById('root'),
     );
 }
 
 let Tracker2 = connect((state) => state)((props) => {
-    console.log("PROPS", props);
     return (
         <Router>
             <div>
                 <Nav />
                 <Route path="/" exact={true} render={() => 
                     <div>
-                        <PostForm users={props.state.users} />
-                        <Tasklist posts={props.state.tasks} />
+                        <TaskForm />
+                        <Tasklist task={props.task} />
                     </div>
                 } />
                 <Route path="/users" exact={true} render={() =>

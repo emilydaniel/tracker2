@@ -1,8 +1,10 @@
+//adapted from SPA Microblog examples in class
+
 import { createStore, combineReducers } from 'redux';
 import deepFreeze from 'deep-freeze';
 
 
-function tasks(state = [], action) {
+function task(state = [], action) {
     switch(action.type) {
         case 'TASK_LIST':
             return [...action.task];
@@ -11,7 +13,7 @@ function tasks(state = [], action) {
         case 'DELETE_TASK':
             return remove_item(state, action.task);
         default:
-            state;
+            return state;
     }
 }
 
@@ -42,9 +44,7 @@ function form(state = empty_form, action) {
 }
 
 function root_reducer(state0, action) {
-    console.log("reducer", action);
-    console.log("state0", state0);
-    let reducer = combineReducers({tasks, users, form});
+    let reducer = combineReducers({task, users, form});
     let state1 = reducer(state0, action);
     console.log("state1", state1);
     return deepFreeze(state1);
