@@ -30,7 +30,7 @@ function TaskForm(props) {
         }
     );
 
-    return
+    return (
         <div style={ {padding: "4ex"} }>
             <h2>New Task</h2>
             <FormGroup>
@@ -61,11 +61,11 @@ function TaskForm(props) {
                        vale={props.task.time_spent} onChange={update} />
             </FormGroup>
             <Button onClick={submit} color="primary">Create</Button>
-        </div>;
+        </div>
+    );
 }
 
 function state2props(state) {
-    console.log("rerender", state);
     return { task: state.task };
 }
 

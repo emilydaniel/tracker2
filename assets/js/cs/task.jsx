@@ -1,14 +1,14 @@
 import React from 'react';
 import { Card, CardBody } from 'reactstrap';
 
-export default function Task(params) {
-    let task = params.task;
+export default function Task(props) {
+    let task = props.task;
     return (
         <Card>
             <CardBody>
                 <div>
                     <h5 className="card-title"><span><strong>
-                        task.title
+                        { task.title }
                     </strong></span></h5>
                     <table className="table">
                         <tr>
@@ -25,7 +25,7 @@ export default function Task(params) {
                         </tr>
                         <tr>
                             <th>Task Complete?</th>
-                            <td className="col-md-1">{ task.complete }</td>
+                            <td className="col-md-1">{ (task.complete ? "Done" : "Incomplete")}</td>
                         </tr>
                     </table>
                 </div>

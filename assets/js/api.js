@@ -7,6 +7,7 @@ class TheServer {
             dataType: "json",
             contentType: "application/json; charset=UTF-8",
             success: (resp) => {
+                console.log("REQUEST TASKS");
                 store.dispatch({
                     type: 'TASK_LIST',
                     task: resp.data,
@@ -21,6 +22,7 @@ class TheServer {
             dataType: "json",
             contentType: "application/json; charset=UTF-8",
             success: (resp) => {
+                console.log("REQUEST USER");
                 store.dispatch({
                     type: 'USERS_LIST',
                     users: resp.data,
@@ -36,6 +38,7 @@ class TheServer {
             contentType: "application/json; charset=UTF-8",
             data: JSON.stringify({ task: data , token: data.token}),
             succes: (resp) => {
+                console.log("SUBMIT TASKS");
                 store.dispatch({
                     type: 'ADD_TASK',
                     task: resp.data,
@@ -51,6 +54,7 @@ class TheServer {
             contentType: "application/json; charset=UTF-8",
             data: JSON.stringify(data),
             success: (resp) => {
+                console.log("LOGIN SUBMIT");
                 store.dispatch({
                     type: 'SET_TOKEN',
                     token: resp,

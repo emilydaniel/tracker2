@@ -1,16 +1,16 @@
 //adapted from SPA microblog by Nat Tuck
-//
+
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { NavItem, Form, FormGroup, Input, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import api from '../api';
 
-let LoginForm = connect(({login}) => {return {login";")((props) => {
+let LoginForm = connect(({login}) => {return {login};})((props) => {
     function update(ev) {
         let tgt = $(ev.target);
         let data = {};
-        data[tgt.attr('name'] = tgt.val();
+        data[tgt.attr('name')] = tgt.val();
         props.dispatch({
             type: 'UPDATE_LOGIN_FORM',
             data: data,
@@ -19,10 +19,9 @@ let LoginForm = connect(({login}) => {return {login";")((props) => {
 
     function create_token(ev) {
         api.submit_login(props.login);
-        console.log(props.login);
     }
 
-    return 
+    return (
         <div className="navbar-text">
             <Form inline>
                 <FormGroup>
@@ -35,14 +34,16 @@ let LoginForm = connect(({login}) => {return {login";")((props) => {
                 </FormGroup>
                 <Button onClick={create_token}>Log In</Button>
             </Form>
-        </div>;
+        </div>
+    );
 });
 
 let Session = connect(({token}) => {return {token};})((props) => {
-    return 
+    return (
         <div className="navbar-text">
             <p>Hello: {props.token.user}</p>
-        </div>;
+        </div>
+    );
 });
 
 
@@ -57,7 +58,7 @@ function Nav(props) {
     }
 
 
-    return (
+    return  (
         <nav className="navbar navbar-dark bg-dark navbar-expand">
             <span className="navbar-brand">
                 Task Tracker

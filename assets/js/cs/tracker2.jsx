@@ -1,21 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRoute as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider, connect } from 'react-redux';
 
 import Nav from './nav';
 import Tasklist from './tasklist';
 import Users from './users';
-import Taskform from './task-form';
-
-export default function tracker2_init(store) {
-    ReactDOM.render(
-        <Provider store={ store }>
-            <Tracker2 />
-        </Provider>,
-        document.getElementById('root'),
-    );
-}
+import TaskForm from './task-form';
 
 let Tracker2 = connect((state) => state)((props) => {
     return (
@@ -35,3 +26,12 @@ let Tracker2 = connect((state) => state)((props) => {
         </Router>
     );
 });
+
+export default function tracker2_init(store) {
+    ReactDOM.render(
+        <Provider store={ store }>
+            <Tracker2 />
+        </Provider>,
+        document.getElementById('root'),
+    );
+}

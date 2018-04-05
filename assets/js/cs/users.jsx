@@ -3,16 +3,12 @@ import { Link } from 'react-router-dom';
 
 function User(params) {
     return (
-        <p>{ props.user.name}</p>
+        <p>{ params.user.name}</p>
     );
 }
 
 export default function Users(params) {
-    let users = _.map(params.users, (user) => {
-        <User key={ user.id }
-              user={ user } />
-         }
-    );
+    let users = _.map(params.users, (user) => <User key={ user.id } user={ user } /> );
 
     return (
          <div>
