@@ -4,7 +4,7 @@ defmodule Tracker2.Tasks.Task do
   alias Tracker2.Users
 
 
-  schema "tasks" do
+  schema "task" do
     field :assigned_user, :string
     field :complete, :boolean, default: false
     field :descr, :string
